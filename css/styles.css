@@ -1,0 +1,136 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+.h-activity {
+	height: 25rem;
+}
+
+.h-hero {
+	height: 35rem;
+}
+
+.h-hero-lg {
+	height: 45rem;
+}
+
+.clip-left {
+	clip-path: polygon(0% 10%, 100% 0%, 100% 100%, 0% 90%);
+}
+
+.clip-right {
+	clip-path: polygon(0% 0%, 100% 10%, 100% 90%, 0% 100%);
+}
+
+.clip-person {
+	clip-path: polygon(0% 0%, 100% 0%, 90% 100%, 0% 80%);
+}
+
+@media (min-width: 768px) {
+
+	.clip-blackhawk{
+		clip-path: polygon(0% 0%, 100% 0%, 100% 2%, 33% 100%, 5% 100%, 0% 20%);
+	}
+
+}
+
+.bottom-top-gradient {
+	background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+
+.activity .text {
+	margin-top: -8rem;
+}
+
+.activity .text p {
+	opacity: 0;
+	transition: all ease-in-out 0.3s;
+}
+
+.activity .text, div {
+	transition: all ease-in-out 0.3s;
+}
+
+.activity.hover:hover .text {
+	top: 50%;
+}
+
+.activity.hover:hover .text p {
+	opacity: 1;
+}
+
+.activity.hover:hover > div > div {
+	top: -25%;
+}
+
+.menu-item:hover .sub-menu {
+	display: block;
+}
+
+.menu-item-depth-0 {
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+}
+
+.cryptedmail:after {
+  content: attr(data-name) "@" attr(data-domain) "." attr(data-tld); 
+}
+
+input[type="text"].wpcf7-form-control,
+input[type="email"].wpcf7-form-control,
+input[type="number"].wpcf7-form-control,
+textarea.wpcf7-form-control,
+#loginform input[type="text"],
+#loginform input[type="email"],
+#loginform input[type="number"],
+#loginform input[type="password"],
+#loginform textarea
+{
+	border: #999 1px solid;
+	margin-bottom: 1rem;
+	padding: 0.125rem 0.25rem;
+}
+
+#loginform input[type="submit"], input[type="submit"].wpcf7-form-control {
+	color: #fff;
+	padding: 0.25rem 0.5rem;
+	background-color: #f00;
+	cursor: pointer;
+}
+
+.current-underline .current-menu-item{
+	text-decoration: underline;
+}
+
+span.wpcf7-form-control-wrap, wpcf7-radio, .wpcf7-list-item {
+	display: block !important;
+	margin: 0.5rem 0 !important;
+}
+
+.wpcf7-list-item-label {
+	padding-left: 0.5rem;
+}
+
+#loginform label, .wpcf7-form label {
+	color: #f00;
+}
+
+.wpcf7-form label input, .wpcf7-form label textarea, .wpcf7-form label .wpcf7-list-item-label {
+	color: #000;	
+}
+
+#loginform input[type="text"],
+#loginform input[type="email"],
+#loginform input[type="number"],
+#loginform input[type="password"],
+#loginform textarea
+{
+	width: 100%;
+	border-color: #999;
+}
+
+.login-remember{
+	display: none;
+}
