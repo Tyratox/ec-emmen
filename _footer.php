@@ -3,7 +3,7 @@
 		?>
 		<footer class="relative pt-5" style="background-color: <?php echo $page_color; ?>">
 			<div class="bg-white">
-				<svg width="100%" height="auto" viewBox="0 0 100 4.5" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+				<svg class="w-full h-auto" width="100" height="4.5" viewBox="0 0 100 4.5" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 				    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 				        <polygon fill="<?php echo $page_color; ?>" points="0 0 100 0 0 4"></polygon>
 				        <path d="M0,4.25 L100,0.25" stroke="#f00" stroke-width="0.5"></path>
@@ -12,8 +12,8 @@
 			
 				<div class="container mx-auto my-5">
 				
-					<div class="flex flex-wrap md:divide-x-4 divide-red space-y-8">
-						<div class="md:w-1/3 px-10">
+					<div class="flex flex-wrap md:divide-x-4 divide-red">
+						<div class="w-full sm:w-1/2 md:w-1/3 px-10">
 							<h3 class="text-xl font-bold mb-5"><?php echo get_styled_title("Stehts Aktuell"); ?></h3>
 							
 							<ul class="list-none">
@@ -51,7 +51,7 @@
 								?>
 							</ul>
 						</div>
-						<div class="md:w-1/3 px-10">
+						<div class="w-full sm:w-1/2 md:w-1/3 px-10 pt-8 sm:pt-0">
 							<h3 class="text-xl font-bold mb-5"><?php echo get_styled_title("Einrad Club") . " " . "Emmebrücke"; ?></h3>
 							
 							<ul class="list-none">
@@ -70,7 +70,7 @@
 								?>
 							</ul>
 						</div>
-						<div class="md:w-1/3 px-10">
+						<div class="w-full sm:w-1/2 md:w-1/3 px-10 pt-8 md:pt-0">
 							<?php
 								
 								$logos = get_field("footer-logos", "option");

@@ -21,7 +21,7 @@
 				
 				echo '<div class="text absolute left-0 right-0 top-1 pb-16">';
 					
-					echo '<div class="container mx-auto">';
+					echo '<div class="container mx-auto px-8">';
 			
 						echo '<h2 class="text-4xl uppercase font-bold ' . $align . '">';
 						

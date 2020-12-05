@@ -9,12 +9,41 @@
 }
 
 .h-hero {
-	height: 35rem;
+	height: 25rem;
+}
+
+@media (min-width: 768px) {
+
+	.h-hero {
+		height: 35rem;
+	}
+
 }
 
 .h-hero-lg {
-	height: 45rem;
+	height: 25rem;
 }
+
+@media (min-width: 768px) {
+
+	.h-hero {
+		height: 45rem;
+	}
+
+}
+
+.blackhawks-margin {
+	
+}
+
+@media (min-width: 768px) {
+
+	.blackhawks-margin {
+		margin-left: 20%;
+	}
+
+}
+
 
 .clip-left {
 	clip-path: polygon(0% 10%, 100% 0%, 100% 100%, 0% 90%);
@@ -41,7 +70,18 @@
 }
 
 .activity .text {
-	margin-top: -8rem;
+	margin-top: -10rem;
+	
+	max-height: 20rem;
+	overflow-y: scroll;
+}
+
+@media (min-width: 375px) {
+
+	.activity .text {
+		margin-top: -8rem;
+	}
+
 }
 
 .activity .text p {
@@ -69,9 +109,13 @@
 	display: block;
 }
 
-.menu-item-depth-0 {
-	padding-top: 1rem;
-	padding-bottom: 1rem;
+@media (min-width: 768px) {
+
+	.menu-item-depth-0 {
+		padding-top: 1rem;
+		padding-bottom: 1rem;
+	}
+
 }
 
 .cryptedmail:after {
@@ -91,6 +135,8 @@ textarea.wpcf7-form-control,
 	border: #999 1px solid;
 	margin-bottom: 1rem;
 	padding: 0.125rem 0.25rem;
+	
+	max-width: 100%;
 }
 
 #loginform input[type="submit"], input[type="submit"].wpcf7-form-control {

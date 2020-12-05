@@ -3,19 +3,19 @@
 	get_header();
  ?>	
 	<div class="z-0 relative h-hero bg-center bg-cover" style="background-image: url(<?php echo get_field("post-index-hero-image", "option"); ?>)">
-		<svg class="absolute bottom-0 left-0 right-0" width="100%" height="auto" viewBox="0 0 100 4" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<svg class="absolute bottom-0 left-0 right-0 w-full h-auto" width="100" height="4" viewBox="0 0 100 4" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 			<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 				<polygon fill="#fff" points="0 0 100 4 0 8"></polygon>
 			</g>
 		</svg>
 	</div>
-	<div class="container mx-auto pb-8">
+	<div class="container mx-auto pb-8 px-8">
 		<h1 class="text-4xl font-bold">
 			<?php echo get_styled_title(get_field("post-index-title", "option")); ?>
 		</h1>
 	</div>
 	
-	<div class="container mx-auto my-10">
+	<div class="container mx-auto my-10 px-8">
 		<h3 class="text-red font-bold text-2xl mb-4">News</h3>
 		<?php
 			
@@ -32,27 +32,27 @@
 				$content = get_the_content();
 				$thumbnail = get_the_post_thumbnail();
 				
-				$text = '<div class="w-1/2">';
+				$text = '<div class="w-full sm:w-1/2 order-1 mb-4 #PADDING">';
 					$text .= '<div class="text-red">' . $date . '</div>';
 					$text .= '<h4 class="font-bold text-2xl">' . $title . '</h4>';
 					$text .= '<hr class="border-t-4 border-black">';
 					$text .= '<p class="pt-4">' . $content . '</p>';
 				$text .= '</div>';
 				
-				$image = '<div class="w-1/2">' . $thumbnail . '</div>';
+				$image = '<div class="w-full sm:w-1/2 order-2 sm:order-1">' . $thumbnail . '</div>';
 				
-				echo '<div class="flex space-x-8">';
+				echo '<div class="flex flex-wrap">';
 				
 				if($i % 2 == 0){
 					//text left, image right
 					
-					echo $text;
+					echo str_replace("#PADDING", "sm:pr-8", $text);
 					echo $image;
 				}else{
 					//image left, text right
 					
 					echo $image;
-					echo $text;
+					echo str_replace("#PADDING", "sm:pl-8", $text);
 				}
 				
 				echo '</div>';

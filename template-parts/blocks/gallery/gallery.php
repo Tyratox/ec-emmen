@@ -34,7 +34,7 @@
 		}
 	
 		foreach($gallery as $image){
-			echo "<div class='w-1/3 px-8'>";
+			echo "<div class='w-full sm:w-1/2 md:w-1/3 px-8 pb-8'>";
 				echo "<img class='clip-person' src='" . $image . "'>";
 			echo "</div>";
 		}

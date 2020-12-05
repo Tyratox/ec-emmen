@@ -27,6 +27,7 @@
 		wp_enqueue_style("main-css", get_template_directory_uri() . "/css/styles.min.css", array("font-montserrat"));
 		
 		//enqueue scripts
+		wp_enqueue_script("mobile-navigation", get_template_directory_uri() . "/js/mobile-navigation.min.js", array(), "1.0", true);
 	});
 	
 	add_filter("block_categories", function($categories, $post){
@@ -198,6 +199,141 @@
 	        $output .= "</div>{$n}";
 	    }
 	}
+	
+	class Custom_Walker_Mobile_Nav_Menu extends Walker_Nav_Menu {
+	 
+	    /**
+	     * Starts the list before the elements are added.
+	     *
+	     * Adds classes to the unordered list sub-menus.
+	     *
+	     * @param string $output Passed by reference. Used to append additional content.
+	     * @param int    $depth  Depth of menu item. Used for padding.
+	     * @param array  $args   An array of arguments. @see wp_nav_menu()
+	     */
+	    function start_lvl( &$output, $depth = 0, $args = array() ) {
+	        // Depth-dependent classes.
+	        $indent = ( $depth > 0  ? str_repeat( "\t", $depth ) : '' ); // code indent
+	        $display_depth = ( $depth + 1); // because it counts the first submenu as 0
+	        $classes = array(
+		        'hidden',
+	            'sub-menu',
+	            ( $display_depth % 2  ? 'menu-odd' : 'menu-even' ),
+	            ( $display_depth >=2 ? 'sub-sub-menu' : '' ),
+	            'menu-depth-' . $display_depth
+	        );
+	        $class_names = implode( ' ', $classes );
+	 
+	        // Build HTML for output.
+	        $output .= "\n" . $indent .
+	        '<div class="text-base ' . $class_names . '">' . 
+	        "\n";
+	    }
+	    
+	    /**
+	     * Ends the list of after the elements are added.
+	     *
+	     * @param string   $output Used to append additional content (passed by reference).
+	     * @param int      $depth  Depth of menu item. Used for padding.
+	     * @param stdClass $args   An object of wp_nav_menu() arguments.
+	     */
+	    public function end_lvl( &$output, $depth = 0, $args = null ) {
+	        if ( isset( $args->item_spacing ) && 'discard' === $args->item_spacing ) {
+	            $t = '';
+	            $n = '';
+	        } else {
+	            $t = "\t";
+	            $n = "\n";
+	        }
+	        $indent  = str_repeat( $t, $depth );
+	        $output .= "$indent</div>{$n}";
+	    }
+	 
+	    /**
+	     * Start the element output.
+	     *
+	     * Adds main/sub-classes to the list items and links.
+	     *
+	     * @param string $output Passed by reference. Used to append additional content.
+	     * @param object $item   Menu item data object.
+	     * @param int    $depth  Depth of menu item. Used for padding.
+	     * @param array  $args   An array of arguments. @see wp_nav_menu()
+	     * @param int    $id     Current item ID.
+	     */
+	    function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
+	        global $wp_query;
+	        $indent = ( $depth > 0 ? str_repeat( "\t", $depth ) : '' ); // code indent
+	 
+	        // Depth-dependent classes.
+	        $depth_classes = array(
+	            ( $depth == 0 ? 'main-menu-item' : 'sub-menu-item' ),
+	            ( $depth >=2 ? 'sub-sub-menu-item' : '' ),
+	            ( $depth % 2 ? 'menu-item-odd' : 'menu-item-even' ),
+	            'menu-item-depth-' . $depth
+	        );
+	        $depth_class_names = esc_attr( implode( ' ', $depth_classes ) );
+	 
+	        // Passed classes.
+	        $classes = empty( $item->classes ) ? array() : (array) $item->classes;
+	        $class_name_array = apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item);
+	        
+	        if(in_array("current_page_item", $class_name_array)){
+		        $class_name_array[] = "text-red";
+	        }
+	        
+	        $class_names = esc_attr( implode( ' ', $class_name_array ) );
+	 
+	        // Build HTML.
+	        $output .= $indent . '<div id="nav-menu-item-'. $item->ID . '" class="relative ' . $depth_class_names . ' ' . $class_names . '">';
+	        
+	        $output .= '<div class="inline-flex items-center mb-4">';
+	 
+	        // Link attributes.
+	        $attributes  = ! empty( $item->attr_title ) ? ' title="'  . esc_attr( $item->attr_title ) .'"' : '';
+	        $attributes .= ! empty( $item->target )     ? ' target="' . esc_attr( $item->target     ) .'"' : '';
+	        $attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
+	        $attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
+	        $attributes .= ' class="menu-link uppercase font-bold hover:text-red transition duration-300 ease-in-out ' . ( $depth > 0 ? 'sub-menu-link' : 'main-menu-link' ) . '"';
+	 
+	        // Build HTML output and pass through the proper filter.
+	        $item_output = sprintf( '%1$s<a%2$s>%3$s%4$s%5$s</a>%6$s%7$s',
+	            $args->before,
+	            $attributes,
+	            $args->link_before,
+	            apply_filters( 'the_title', $item->title, $item->ID ),
+	            $args->link_after,
+	            $args->after,
+	            $args->walker->has_children ?
+	            	'<svg class="toggle-submenu text-red cursor-pointer transition duration-300 ease-in-out h-10 w-10 transform hover:rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">' .
+	            		'<path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />' .
+					'</svg>'
+					: ""
+	        );
+	        $output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
+	        
+	        $output .= "</div>";
+	    }
+	    
+	    /**
+	     * Ends the element output, if needed.
+	     *
+	     * @param string   $output Used to append additional content (passed by reference).
+	     * @param WP_Post  $item   Page data object. Not used.
+	     * @param int      $depth  Depth of page. Not Used.
+	     * @param stdClass $args   An object of wp_nav_menu() arguments.
+	     */
+	    public function end_el( &$output, $item, $depth = 0, $args = null ) {
+	        if ( isset( $args->item_spacing ) && 'discard' === $args->item_spacing ) {
+	            $t = '';
+	            $n = '';
+	        } else {
+	            $t = "\t";
+	            $n = "\n";
+	        }
+	        $output .= "</div>{$n}";
+	    }
+	}
+	
 	
 	add_filter("render_block", function($content, $block){
 		if(strpos($block["blockName"], "acf/") === false){

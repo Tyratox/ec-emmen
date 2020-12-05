@@ -3,7 +3,7 @@ module.exports = {
 	  purgeLayersByDefault: true
   },
   purge: {
-	  layers: [/*'base', 'components', 'utilities'*/],
+	  layers: ['base', 'components', 'utilities'],
 	  content: ['./**/*.php']
   },
   theme: {
