@@ -3,7 +3,7 @@
 	$text = get_field("text");
 	$image = get_field("image");
 	
-	echo '<div class="mb-8">';
+	echo '<div class="mb-8 -mx-8 -mt-8 md:mx-0 md:mt-0">';
 	
 		echo '<div class="text-white relative">';
 		

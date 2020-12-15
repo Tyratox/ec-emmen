@@ -52,6 +52,7 @@
 							</ul>
 						</div>
 						<div class="w-full sm:w-1/2 md:w-1/3 px-10 pt-8 sm:pt-0">
+							<hr class="border-red border-t-4 mt-2 mb-4 sm:hidden">
 							<h3 class="text-xl font-bold mb-5"><?php echo get_styled_title("Einrad Club") . " " . "Emmebrücke"; ?></h3>
 							
 							<ul class="list-none">
@@ -71,6 +72,7 @@
 							</ul>
 						</div>
 						<div class="w-full sm:w-1/2 md:w-1/3 px-10 pt-8 md:pt-0">
+							<hr class="border-red border-t-4 mt-2 mb-4 md:hidden">
 							<?php
 								
 								$logos = get_field("footer-logos", "option");

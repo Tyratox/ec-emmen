@@ -63,6 +63,16 @@
 		"oF": 0,
 		"oS": 3
 		},
+	"/css/glightbox.min.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "/css/glightbox.min.min.css",
+		"oF": 0,
+		"oS": 3
+		},
 	"/css/styles.css": {
 		"aP": 1,
 		"bl": 0,
@@ -115,11 +125,37 @@
 		"oAP": "/header.php",
 		"oF": 0
 		},
+	"/images/blackhawks-logo-red.png": {
+		"ft": 32768,
+		"iS": 529716,
+		"oA": 0,
+		"oAP": "/images/blackhawks-logo-red.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"ou": "lpckwebp-none",
+		"q": 100,
+		"rq": 75
+		},
 	"/images/blackhawks-logo.png": {
 		"ft": 32768,
 		"iS": 544915,
 		"oA": 0,
 		"oAP": "/images/blackhawks-logo.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"ou": "lpckwebp-none",
+		"q": 100,
+		"rq": 75
+		},
+	"/images/eagle.png": {
+		"ft": 32768,
+		"iS": 369612,
+		"oA": 0,
+		"oAP": "/images/eagle.png",
 		"oF": 0,
 		"oIPL": 0,
 		"opt": 0,
@@ -162,6 +198,17 @@
 		"oAP": "/index.php",
 		"oF": 0
 		},
+	"/js/glightbox.min.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "/js/glightbox.min.min.js",
+		"oF": 0,
+		"sC": 3,
+		"tS": 1
+		},
 	"/js/mobile-navigation.js": {
 		"bF": 0,
 		"ft": 64,
@@ -169,6 +216,17 @@
 		"mi": 1,
 		"oA": 0,
 		"oAP": "/js/mobile-navigation.min.js",
+		"oF": 0,
+		"sC": 3,
+		"tS": 1
+		},
+	"/js/mobile-navigation.min.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "/js/mobile-navigation.min.min.js",
 		"oF": 0,
 		"sC": 3,
 		"tS": 1
@@ -194,6 +252,14 @@
 		"oF": 0,
 		"oO": 0,
 		"oS": 1
+		},
+	"/page-activities.php": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/page-activities.php",
+		"oF": 0
 		},
 	"/page-blackhawk.php": {
 		"cB": 0,
@@ -377,6 +443,14 @@
 		"hM": 0,
 		"oA": 0,
 		"oAP": "/template-parts/blocks/shop-recommendation/shop-recommendation.php",
+		"oF": 0
+		},
+	"/template-parts/blocks/spacer/spacer.php": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/template-parts/blocks/spacer/spacer.php",
 		"oF": 0
 		},
 	"/template-parts/blocks/sponsors/sponsors.php": {

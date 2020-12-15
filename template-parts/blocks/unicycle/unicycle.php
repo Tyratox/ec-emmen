@@ -6,7 +6,7 @@
 		
 			echo '<div class="w-1/2 pr-4">';
 			
-				echo '<img class="" src="' . get_field("image") . '">';
+				echo '<img class="clip-person" src="' . get_field("image") . '">';
 			
 			echo '</div>';
 			

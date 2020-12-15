@@ -34,7 +34,7 @@
 		<div class="py-16 relative z-2 w-3/5" style="margin-left: 20%;">
 			<div class="ml-16 bg-white p-8">
 				
-				<h1 class="text-4xl font-bold">
+				<h1 class="text-4xl font-black">
 					<?php echo get_styled_title(get_the_title()); ?>
 				</h1>
 				

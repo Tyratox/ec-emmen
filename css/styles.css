@@ -93,15 +93,15 @@
 	transition: all ease-in-out 0.3s;
 }
 
-.activity.hover:hover .text {
+.activity.hover:hover .text, .activity.hover.on-hover .text {
 	top: 50%;
 }
 
-.activity.hover:hover .text p {
+.activity.hover:hover .text p, .activity.hover.on-hover .text p {
 	opacity: 1;
 }
 
-.activity.hover:hover > div > div {
+.activity.hover:hover > div > div, .activity.hover.on-hover > div > div {
 	top: -25%;
 }
 
@@ -177,6 +177,20 @@ span.wpcf7-form-control-wrap, wpcf7-radio, .wpcf7-list-item {
 	border-color: #999;
 }
 
+p.login-submit{
+	display:inline-block;
+	margin-right: 0.5rem;
+}
+
 .login-remember{
 	display: none;
+}
+
+.wpcf7-form label span {
+	font-size: 0.8rem;
+	color: #a5a5a5;
+}
+
+#menu-blackhawks li{
+	margin-bottom: 0.25rem;
 }

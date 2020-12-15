@@ -19,5 +19,5 @@
 	$domain = implode(".", $s);
 	
 	
-	echo '<a href="#" class="cryptedmail text-red py-8" data-name="' . $name . '" data-domain="' . $domain . '" data-tld="' . $tld . '" onclick="window.location.href = \'mailto:\' + this.dataset.name + \'@\' + this.dataset.domain + '.' + this.dataset.tld; return false;"></a>';	
+	echo '<a href="#" class="cryptedmail text-red py-8" data-name="' . $name . '" data-domain="' . $domain . '" data-tld="' . $tld . '" onclick="window.location.href = \'mailto:\' + this.dataset.name + \'@\' + this.dataset.domain + \'.\' + this.dataset.tld; return false;"></a>';	
 ?>

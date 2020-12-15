@@ -9,6 +9,7 @@
 		$image = $activity['image'];
 		$description = $activity['description'];
 		$url = $activity['link-url'];
+		$btn_text = $activity['btn-text'];
 		
 		$clip = $i % 2 === 0 ? "clip-left" : "clip-right";
 		$align = $i % 2 === 0 ? "text-left" : "text-right";
@@ -23,7 +24,7 @@
 					
 					echo '<div class="container mx-auto px-8">';
 			
-						echo '<h2 class="text-4xl uppercase font-bold ' . $align . '">';
+						echo '<h2 class="text-4xl uppercase font-black ' . $align . '">';
 						
 							echo get_styled_title($title);
 								
@@ -32,6 +33,10 @@
 						echo '<p>';
 							echo $description;
 						echo '</p>';
+						
+						if(!empty($url) && !empty($btn_text)){
+							echo "<a class='bg-red text-white p-2 mt-4 inline-block' href='" . $url . "'>" . $btn_text . "</a>";	
+						}
 					
 					echo '</div>';
 				
@@ -40,6 +45,5 @@
 			echo '</div>';
 		
 		echo "</div>";
-			
 	}
 ?>

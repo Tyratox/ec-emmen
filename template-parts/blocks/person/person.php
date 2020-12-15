@@ -1,16 +1,16 @@
 <?php
 	
-	echo '<div class="container px-8 my-8">';
+	echo '<div class="container my-8">';
 	
-		echo '<div class="flex">';
+		echo '<div class="flex flex-wrap">';
 		
-			echo '<div class="w-1/2 pr-4">';
+			echo '<div class="w-full md:w-1/2 pr-4">';
 			
 				echo '<img class="clip-person" src="' . get_field("image") . '">';
 			
 			echo '</div>';
 			
-			echo '<div class="w-1/2 pl-4">';
+			echo '<div class="w-full md:w-1/2 pl-4">';
 			
 				$above = get_field("above");
 				$first_name = get_field("first-name");

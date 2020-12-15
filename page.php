@@ -18,7 +18,7 @@
 			
 			<div class="bg-white px-8 pb-8">
 			
-				<h1 class="break-all text-4xl font-bold mb-8 uppercase"><?php echo get_styled_title(get_the_title()); ?></h1>
+				<h1 class="break-all text-4xl font-black mb-8 uppercase"><?php echo get_styled_title(get_the_title()); ?></h1>
 				<?php the_content(); ?>
 			
 			</div>

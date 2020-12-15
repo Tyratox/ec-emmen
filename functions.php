@@ -22,12 +22,14 @@
 	
 	add_action("wp_enqueue_scripts", function(){
 		//enqueue styles
-		wp_enqueue_style("font-montserrat", "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+		wp_enqueue_style("font-montserrat", "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap");
 		wp_enqueue_style("fontawesome", get_template_directory_uri() . "/css/all.min.css");
+		wp_enqueue_style("glightbox-css", get_template_directory_uri() . "/css/glightbox.min.css");
 		wp_enqueue_style("main-css", get_template_directory_uri() . "/css/styles.min.css", array("font-montserrat"));
 		
 		//enqueue scripts
-		wp_enqueue_script("mobile-navigation", get_template_directory_uri() . "/js/mobile-navigation.min.js", array(), "1.0", true);
+		wp_enqueue_script("glightbox-js", get_template_directory_uri() . "/js/glightbox.min.js", array(), "1.0", true);
+		wp_enqueue_script("mobile-navigation", get_template_directory_uri() . "/js/mobile-navigation.min.js", array('glightbox-js'), "1.0", true);
 	});
 	
 	add_filter("block_categories", function($categories, $post){
@@ -158,8 +160,8 @@
 	        $attributes  = ! empty( $item->attr_title ) ? ' title="'  . esc_attr( $item->attr_title ) .'"' : '';
 	        $attributes .= ! empty( $item->target )     ? ' target="' . esc_attr( $item->target     ) .'"' : '';
 	        $attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
-	        $attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
-	        $attributes .= ' class="menu-link uppercase font-bold hover:text-red transition duration-300 ease-in-out ' . ( $depth > 0 ? 'sub-menu-link' : 'main-menu-link' ) . '"';
+	        $attributes .= ! empty( $item->url ) && !($args->walker->has_children)        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
+	        $attributes .= ' class="menu-link uppercase font-black hover:text-red transition duration-300 ease-in-out ' . ( $depth > 0 ? 'sub-menu-link' : 'main-menu-link' ) . '"';
 	 
 	        // Build HTML output and pass through the proper filter.
 	        $item_output = sprintf( '%1$s<a%2$s>%3$s%4$s%5$s</a>%6$s%7$s',
@@ -281,6 +283,10 @@
 		        $class_name_array[] = "text-red";
 	        }
 	        
+	        if($args->walker->has_children){
+		        $class_name_array[] = "toggle-submenu";
+	        }
+	        
 	        $class_names = esc_attr( implode( ' ', $class_name_array ) );
 	 
 	        // Build HTML.
@@ -292,8 +298,8 @@
 	        $attributes  = ! empty( $item->attr_title ) ? ' title="'  . esc_attr( $item->attr_title ) .'"' : '';
 	        $attributes .= ! empty( $item->target )     ? ' target="' . esc_attr( $item->target     ) .'"' : '';
 	        $attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
-	        $attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
-	        $attributes .= ' class="menu-link uppercase font-bold hover:text-red transition duration-300 ease-in-out ' . ( $depth > 0 ? 'sub-menu-link' : 'main-menu-link' ) . '"';
+	        $attributes .= ! empty( $item->url ) && !($args->walker->has_children)        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
+	        $attributes .= ' class="menu-link uppercase font-black hover:text-red transition duration-300 ease-in-out ' . ( $depth > 0 ? 'sub-menu-link' : 'main-menu-link' ) . '"';
 	 
 	        // Build HTML output and pass through the proper filter.
 	        $item_output = sprintf( '%1$s<a%2$s>%3$s%4$s%5$s</a>%6$s%7$s',
@@ -304,7 +310,7 @@
 	            $args->link_after,
 	            $args->after,
 	            $args->walker->has_children ?
-	            	'<svg class="toggle-submenu text-red cursor-pointer transition duration-300 ease-in-out h-10 w-10 transform hover:rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">' .
+	            	'<svg class="triangle text-red cursor-pointer transition duration-300 ease-in-out h-10 w-10 transform" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">' .
 	            		'<path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />' .
 					'</svg>'
 					: ""
@@ -398,7 +404,6 @@
 	});
 	
 	add_filter("allowed_block_types", function($allowed_blocks, $post){
-		return true;
 		if(!is_array($allowed_blocks)){
 			$allowed_blocks = array(
 				'core/paragraph',
@@ -420,7 +425,9 @@
 				'acf/gallery',
 				'contact-form-7/contact-form-selector',
 				'acf/registrations',
-				'acf/login'
+				'acf/login',
+				'acf/file',
+				'acf/spacer'
 			);
 		}
 		
@@ -649,6 +656,16 @@
 	            'icon'              => 'download',
 	            'keywords'          => array( 'datei', 'download' ),
 	        ));
+	        
+	        acf_register_block_type(array(
+	            'name'              => 'spacer',
+	            'title'             => 'Abstand / Spacer',
+	            'description'       => 'Füge ein Abstand ein',
+	            'render_template'   => 'template-parts/blocks/spacer/spacer.php',
+	            'category'          => 'content-blocks',
+	            'icon'              => 'align-wide',
+	            'keywords'          => array( 'abstand', 'spacer' ),
+	        ));
 	    }
 	});
 	
@@ -667,5 +684,10 @@
 			show_admin_bar(false);
 		}
 	});
+	
+	add_action( 'login_form_bottom', 'add_lost_password_link' );
+	function add_lost_password_link() {
+		return '<a class="text-red underline" href="/wp-login.php?action=lostpassword">Passwort vergessen?</a>';
+	}
 	
 ?>

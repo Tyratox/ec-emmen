@@ -22,9 +22,11 @@
 							array(
 								'post_type' => 'event',
 								'posts_per_page' => 2,
-								'meta_key' => 'date_from',
+								'meta_key' => 'date_to',
 								'orderby' => 'meta_value',
-								'order' => 'ASC'
+								'order' => 'ASC',
+								'meta_value'=> date('Ymd'),
+								'meta_compare'=>'>=',
 							)
 						);
 						
@@ -41,33 +43,43 @@
 							$time_from = get_field("time_from", $event);
 							$time_to = get_field("time_to", $event);
 							
-							$time = $date_from;
+							$cancelled = get_field("cancelled", $event);
+							$cancelled = empty($cancelled) ? false : true;
 							
-							if(!empty($time_from)){
-								$time .= " " . $time_from;
-							}
-							
-							if($date_from === $date_to || empty($date_to)){
+							$time = "";
+					
+							if($date_from === $date_to || empty($date_from)){
 								
-								if(!empty($time_to)){
-									$time .= " - " . $time_to;
+								if(!empty($time_from) && !empty($time_to)){
+									$time = $date_to . " " . $time_from . " - " . $time_to;
+								}else if(!empty($time_from)){
+									$time = $date_to . ", ab " . $time_from;
+								}else if(!empty($time_to)){
+									$time = $date_to . ", bis " . $time_to;
+								}else{
+									$time = $date_to;
 								}
 								
 							}else{
-								$time .= " bis " . $date_to;
 								
-								if(!empty($time_to)){
-									$time .= " " . $time_to;
+								if(!empty($time_from) && !empty($time_to)){
+									$time = $date_from . " " . $time_from . " - " . $date_to . " " . $time_to;
+								}else if(!empty($time_from)){
+									$time = $date_from . " " . $time_from . " - " . $date_to;
+								}else if(!empty($time_to)){
+									$time = $date_from . " - " . $date_to . " " . $time_to;
+								}else{
+									$time = $date_from . " - " . $date_to;
 								}
 							}
 							
 							
 							
 							echo '<div class="w-full sm:w-1/2 sm:pr-16 pb-8">';
-								echo '<span class="text-red">' . $time . '</span>';
-								echo '<h3 class="font-bold border-red">' . $event->post_title . '</h3>';
+								echo '<span class="text-red ' . ($cancelled ? "line-through" : "") . '">' . $time . '</span>';
+								echo '<h3 class="font-bold border-red">' . '<span class="' . ($cancelled ? "line-through" : "") . '">' . $event->post_title . "</span>" . ($cancelled ? " <span class='no-underline text-red'>Abgesagt</span>" : "") .  '</h3>';
 								echo '<hr class="border-red border-t-4">';
-								echo '<span>' . get_field('description', $event) . '</span>';
+								echo '<span class="' . ($cancelled ? "line-through" : "") . '">' . get_field('description', $event) . '</span>';
 							echo '</div>';
 						}
 						
