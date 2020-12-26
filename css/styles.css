@@ -26,7 +26,7 @@
 
 @media (min-width: 768px) {
 
-	.h-hero {
+	.h-hero-lg {
 		height: 45rem;
 	}
 
@@ -44,6 +44,29 @@
 
 }
 
+.clip-left-upper-triangle {
+	clip-path: polygon(0% 0%, 100% 0%, 0% calc(100% - 0.5rem));
+}
+
+.clip-left-lower-triangle {
+	clip-path: polygon(0% 0%, 100% 100%, 0% calc(100% - 0.5rem));
+}
+
+.clip-right-upper-triangle {
+	clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - 0.5rem));
+}
+
+.clip-right-lower-triangle {
+	clip-path: polygon(0% 100%, 100% 0%, 100% calc(100% - 0.5rem));
+}
+
+.clip-diagonal-bottom-left {
+	clip-path: polygon(0% 100%, 100% 0.5rem, 100% 0%, 0% calc(100% - 0.5rem));
+}
+
+.clip-diagonal-top-left {
+	
+}
 
 .clip-left {
 	clip-path: polygon(0% 10%, 100% 0%, 100% 100%, 0% 90%);
@@ -54,6 +77,9 @@
 }
 
 .clip-person {
+	width: 100%;
+	padding-top: 100%;
+	
 	clip-path: polygon(0% 0%, 100% 0%, 90% 100%, 0% 80%);
 }
 

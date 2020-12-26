@@ -6,7 +6,9 @@
 		
 			echo '<div class="w-full md:w-1/2 pr-4">';
 			
-				echo '<img class="clip-person" src="' . get_field("image") . '">';
+				echo '<div class="clip-person relative">';
+					echo '<div class="absolute left-0 top-0 right-0 bottom-0 bg-center bg-cover" style="background-image: url(' . get_field("image") . ')"></div>';
+				echo '</div>';
 			
 			echo '</div>';
 			

@@ -1,22 +1,22 @@
 document.addEventListener("DOMContentLoaded", () => {
 	
 	const onToggleMobileNavigation = () => {
+		
+		const nav = document.querySelector("nav.header");
+		
 		document.querySelectorAll(".mobile-navigation").forEach((e) => {
 			if(e.classList.contains("hidden")){
 				e.classList.remove("hidden");
+				nav.style.height = "100%";
 			}else{
 				e.classList.add("hidden");
+				nav.style.height = "auto";
 			}
 		});
 	};
 	
-	const onToggleSubmenu = (e) => {
-		e.preventDefault();
-		e.stopPropagation();
-		
-		
-		const btn = e.currentTarget || e.target;
-		const navItem = btn.parentElement.parentElement;
+	const toggleSubmenu = (navItem) => {
+		console.log(navItem);
 		const subMenu = navItem.querySelector(".sub-menu");
 		const triangle = navItem.querySelector(".triangle");
 		
@@ -26,7 +26,17 @@ document.addEventListener("DOMContentLoaded", () => {
 		}else{
 			subMenu.classList.add("hidden");
 			triangle.classList.remove("rotate-180");
+			navItem.blur();
 		}
+	};
+	
+	const onToggleSubmenu = (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+		
+		
+		const btn = e.currentTarget || e.target;
+		toggleSubmenu(btn.parentElement);
 	};
 	
 	const onToggleActivity = (e) => {
@@ -42,9 +52,11 @@ document.addEventListener("DOMContentLoaded", () => {
 	
 	document.querySelectorAll(".toggle-mobile-navigation").forEach(e => e.addEventListener("click", onToggleMobileNavigation));
 	
-	document.querySelectorAll(".toggle-submenu").forEach(e => e.addEventListener("click", onToggleSubmenu));
+	document.querySelectorAll(".toggle-submenu > .link").forEach(e => e.addEventListener("click", onToggleSubmenu));
 	
 	document.querySelectorAll(".activity.hover").forEach(e => e.addEventListener("click", onToggleActivity));
+	
+	document.querySelectorAll(".mobile-navigation .current_page_parent").forEach(toggleSubmenu);
 	
 	const lightbox = GLightbox({
 	    touchNavigation: true,

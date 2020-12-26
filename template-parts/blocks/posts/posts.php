@@ -23,7 +23,7 @@
 		         echo '<div class="mb-16">';
 			
 				$date = get_the_date("d.m.Y", get_the_id());
-				$title = get_the_title($post);
+				$title = get_the_title(get_the_id());
 				$content = get_the_content(null, false, get_the_id());
 				$thumbnail = get_the_post_thumbnail(get_the_id());
 				

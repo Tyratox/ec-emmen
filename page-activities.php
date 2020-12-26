@@ -20,16 +20,20 @@
 						</g>
 					</svg>
 					
-					<div class="bg-white px-8 pb-8 absolute left-0 right-0 sm:px-8 h-40">
+					<div class="bg-white px-8 pb-8 ">
 					
 						<h1 class="break-all text-4xl font-black mb-8 uppercase"><?php echo get_styled_title(get_the_title()); ?></h1>
+						
+						<h2 class="font-bold md:text-center md:w-2/3 lg:w-2/5 md:ml-32 text-xl"><?php echo get_field("subtitle"); ?></h2>
 					
+					</div>
+					<div class="bg-white px-8 pb-8 absolute h-40 w-full">
 					</div>
 				</div>
 			</div>
 		</div>
 		
-		<div class="relative z-10 mt-10">
+		<div class="relative z-10">
 			<?php the_content(); ?>
 		</div>
 	

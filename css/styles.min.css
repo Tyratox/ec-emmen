@@ -9404,7 +9404,7 @@ video {
 }
 
 @media (min-width: 768px){
-  .h-hero{
+  .h-hero-lg{
     height:45rem
   }
 }
@@ -9413,6 +9413,31 @@ video {
   .blackhawks-margin{
     margin-left:20%
   }
+}
+
+.clip-left-upper-triangle{
+  -webkit-clip-path:polygon(0% 0%, 100% 0%, 0% calc(100% - 0.5rem));
+  clip-path:polygon(0% 0%, 100% 0%, 0% calc(100% - 0.5rem))
+}
+
+.clip-left-lower-triangle{
+  -webkit-clip-path:polygon(0% 0%, 100% 100%, 0% calc(100% - 0.5rem));
+  clip-path:polygon(0% 0%, 100% 100%, 0% calc(100% - 0.5rem))
+}
+
+.clip-right-upper-triangle{
+  -webkit-clip-path:polygon(0% 0%, 100% 0%, 100% calc(100% - 0.5rem));
+  clip-path:polygon(0% 0%, 100% 0%, 100% calc(100% - 0.5rem))
+}
+
+.clip-right-lower-triangle{
+  -webkit-clip-path:polygon(0% 100%, 100% 0%, 100% calc(100% - 0.5rem));
+  clip-path:polygon(0% 100%, 100% 0%, 100% calc(100% - 0.5rem))
+}
+
+.clip-diagonal-bottom-left{
+  -webkit-clip-path:polygon(0% 100%, 100% 0.5rem, 100% 0%, 0% calc(100% - 0.5rem));
+  clip-path:polygon(0% 100%, 100% 0.5rem, 100% 0%, 0% calc(100% - 0.5rem))
 }
 
 .clip-left{
@@ -9426,6 +9451,8 @@ video {
 }
 
 .clip-person{
+  width:100%;
+  padding-top:100%;
   -webkit-clip-path:polygon(0% 0%, 100% 0%, 90% 100%, 0% 80%);
   clip-path:polygon(0% 0%, 100% 0%, 90% 100%, 0% 80%)
 }

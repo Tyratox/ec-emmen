@@ -25,11 +25,11 @@
 		wp_enqueue_style("font-montserrat", "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap");
 		wp_enqueue_style("fontawesome", get_template_directory_uri() . "/css/all.min.css");
 		wp_enqueue_style("glightbox-css", get_template_directory_uri() . "/css/glightbox.min.css");
-		wp_enqueue_style("main-css", get_template_directory_uri() . "/css/styles.min.css", array("font-montserrat"));
+		wp_enqueue_style("main-css", get_template_directory_uri() . "/css/styles.min.css", array("font-montserrat"), "1.4.2");
 		
 		//enqueue scripts
-		wp_enqueue_script("glightbox-js", get_template_directory_uri() . "/js/glightbox.min.js", array(), "1.0", true);
-		wp_enqueue_script("mobile-navigation", get_template_directory_uri() . "/js/mobile-navigation.min.js", array('glightbox-js'), "1.0", true);
+		wp_enqueue_script("glightbox-js", get_template_directory_uri() . "/js/glightbox.min.js", array(), "1.1", true);
+		wp_enqueue_script("mobile-navigation", get_template_directory_uri() . "/js/mobile-navigation.min.js", array('glightbox-js'), "1.4.1", true);
 	});
 	
 	add_filter("block_categories", function($categories, $post){
@@ -292,28 +292,28 @@
 	        // Build HTML.
 	        $output .= $indent . '<div id="nav-menu-item-'. $item->ID . '" class="relative ' . $depth_class_names . ' ' . $class_names . '">';
 	        
-	        $output .= '<div class="inline-flex items-center mb-4">';
+	        $output .= '<div class="link inline-flex items-center mb-4">';
 	 
 	        // Link attributes.
 	        $attributes  = ! empty( $item->attr_title ) ? ' title="'  . esc_attr( $item->attr_title ) .'"' : '';
 	        $attributes .= ! empty( $item->target )     ? ' target="' . esc_attr( $item->target     ) .'"' : '';
 	        $attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
 	        $attributes .= ! empty( $item->url ) && !($args->walker->has_children)        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
-	        $attributes .= ' class="menu-link uppercase font-black hover:text-red transition duration-300 ease-in-out ' . ( $depth > 0 ? 'sub-menu-link' : 'main-menu-link' ) . '"';
+	        $attributes .= ' class="menu-link inline-block relative uppercase font-black hover:text-red transition duration-300 ease-in-out ' . ( $depth > 0 ? 'sub-menu-link' : 'main-menu-link' ) . '"';
 	 
 	        // Build HTML output and pass through the proper filter.
-	        $item_output = sprintf( '%1$s<a%2$s>%3$s%4$s%5$s</a>%6$s%7$s',
+	        $item_output = sprintf( '%1$s<a%2$s>%3$s%4$s%5$s%6$s</a>%7$s',
 	            $args->before,
 	            $attributes,
 	            $args->link_before,
 	            apply_filters( 'the_title', $item->title, $item->ID ),
 	            $args->link_after,
-	            $args->after,
 	            $args->walker->has_children ?
-	            	'<svg class="triangle text-red cursor-pointer transition duration-300 ease-in-out h-10 w-10 transform" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">' .
+	            	'<svg class="triangle absolute top-0 text-red cursor-pointer transition duration-300 ease-in-out h-10 w-10 transform" style="right: -2.5rem;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">' .
 	            		'<path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />' .
 					'</svg>'
-					: ""
+					: "",
+				$args->after
 	        );
 	        $output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 	        
@@ -427,7 +427,9 @@
 				'acf/registrations',
 				'acf/login',
 				'acf/file',
-				'acf/spacer'
+				'acf/spacer',
+				'acf/video',
+				'acf/youtube',
 			);
 		}
 		
@@ -666,11 +668,36 @@
 	            'icon'              => 'align-wide',
 	            'keywords'          => array( 'abstand', 'spacer' ),
 	        ));
+	        
+	        acf_register_block_type(array(
+	            'name'              => 'video',
+	            'title'             => 'Video',
+	            'description'       => 'Füge ein Video ein',
+	            'render_template'   => 'template-parts/blocks/video/video.php',
+	            'category'          => 'content-blocks',
+	            'icon'              => 'format-video',
+	            'keywords'          => array( 'video', 'movie', 'film' ),
+	        ));
+	        
+	        acf_register_block_type(array(
+	            'name'              => 'youtube',
+	            'title'             => 'Youtube Video',
+	            'description'       => 'Füge ein Youtube Video ein',
+	            'render_template'   => 'template-parts/blocks/youtube/youtube.php',
+	            'category'          => 'content-blocks',
+	            'icon'              => 'format-video',
+	            'keywords'          => array( 'video', 'movie', 'film', 'yt', 'youtube' ),
+	        ));
 	    }
 	});
 	
 	add_filter('login_redirect', function($redirect_to, $request, $user){
-		return (is_array($user->roles) && in_array( 'administrator', $user->roles)) ? admin_url() : get_field("member-area-redirect-url", "option");
+		if(!is_wp_error($user)){
+			//return (is_array($user->roles) && in_array( 'administrator', $user->roles)) ? admin_url() : get_field("member-area-redirect-url", "option");
+			return get_field("member-area-redirect-url", "option");
+		}else{
+			return admin_url();
+		}
 	}, 10, 3 );
 	
 	add_action("admin_init", function(){

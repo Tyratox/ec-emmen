@@ -2,7 +2,7 @@
 	
 	$image = get_field("image");
 	$text = get_field("text");
-	$url = get_field("url");
+	$url = get_field("link-url");
 	
 	$layout = get_field("layout");
 	

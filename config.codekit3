@@ -301,6 +301,14 @@
 		"oAP": "/page.php",
 		"oF": 0
 		},
+	"/single.php": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/single.php",
+		"oF": 0
+		},
 	"/style.css": {
 		"aP": 1,
 		"bl": 0,
@@ -483,6 +491,22 @@
 		"hM": 0,
 		"oA": 0,
 		"oAP": "/template-parts/blocks/unicycle/unicycle.php",
+		"oF": 0
+		},
+	"/template-parts/blocks/video/video.php": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/template-parts/blocks/video/video.php",
+		"oF": 0
+		},
+	"/template-parts/blocks/youtube/youtube.php": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/template-parts/blocks/youtube/youtube.php",
 		"oF": 0
 		},
 	"/webfonts/fa-brands-400.eot": {

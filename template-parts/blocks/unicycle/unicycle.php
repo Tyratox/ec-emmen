@@ -4,13 +4,15 @@
 	
 		echo '<div class="flex">';
 		
-			echo '<div class="w-1/2 pr-4">';
+			echo '<div class="w-full sm:w-1/2 md:w-1/3 pr-4">';
 			
-				echo '<img class="clip-person" src="' . get_field("image") . '">';
+				echo '<div class="clip-person relative">';
+					echo '<div class="absolute left-0 top-0 right-0 bottom-0 bg-center bg-cover" style="background-image: url(' . get_field("image") . ')"></div>';
+				echo '</div>';
 			
 			echo '</div>';
 			
-			echo '<div class="w-1/2 pl-4">';
+			echo '<div class="w-full sm:w-1/2 md:w-2/3 pl-4">';
 			
 				$above = get_field("above");
 				$name = get_field("name");
