@@ -7,6 +7,7 @@
 	}
 	
 	$gallery = get_field("gallery");
+	$show_download = get_field("show-download");
 	
 	echo "<div class='flex flex-wrap'>";
 	
@@ -47,16 +48,33 @@
 		}
 	
 		foreach($gallery as $image){
+			$url = $image['url'];
+			
 			echo "<div class='w-full sm:w-1/2 md:w-1/3 px-8 pb-8'>";
 				echo '<div class="clip-person relative">';
-					echo '<div class="absolute left-0 top-0 right-0 bottom-0 bg-center bg-cover lazy" data-bg="' . $image . '">';
-						echo "<img class='absolute left-0 top-0 w-full h-full glightbox opacity-0 cursor-pointer' src='" . $image . "' data-gallery='gallery-" . ($gallery_count) . "'>";
+					if(is_admin()){
+						echo '<div class="absolute left-0 top-0 right-0 bottom-0 bg-center bg-cover" style="background-image: url(' . $url . ')">';
+					}else{
+						echo '<div class="absolute left-0 top-0 right-0 bottom-0 bg-center bg-cover lazy" data-bg="' . $url . '">';
+					}
+						echo "<img class='absolute left-0 top-0 w-full h-full glightbox opacity-0 cursor-pointer' src='" . $url . "' data-gallery='gallery-" . ($gallery_count) . "'>";
 					echo '</div>';
 				echo '</div>';
 			echo "</div>";
 		}
 	
 	echo "</div>";
+	
+	$ids = array_map(function($image){return $image['ID'];}, $gallery);
+	
+	if($show_download){
+		echo "<div class='flex justify-center'>";
+			echo '<a download class="hover:text-red flex items-center" href="' . "/wp-json/ec-emmen/download/" . implode(",", $ids) . '">';
+				echo '<i class="fas fa-cloud-download-alt text-3xl w-10 h-auto mr-2"></i>';
+				echo "Download";
+			echo '</a>';
+		echo "</div>";
+	}
 	
 	$gallery_count++;
 	

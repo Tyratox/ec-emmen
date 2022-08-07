@@ -768,4 +768,49 @@
 		return '<a class="text-red underline" href="/wp-login.php?action=lostpassword">Passwort vergessen?</a>';
 	}
 	
+	add_action( 'rest_api_init', function(){
+	  register_rest_route( 'ec-emmen', '/download/(?P<ids>(\d+,)*\d+)', array(
+	    'methods' => 'GET',
+	    'callback' => function(WP_REST_Request $request){
+			$parameters = $request->get_params();
+			$ids = array_map("intval", explode(",", $parameters["ids"]));
+			$paths = array_map("get_attached_file", $ids);
+			
+			/*$posts = (
+				new WP_Query(
+					array(
+						"post_type" => "attachment",
+						"post__in" => array_map("intval", $ids),
+						"posts_per_page" => -1,
+						"post_status" => "any"
+					)
+				)
+			)->posts;*/
+			
+			$tmp_file = tempnam(get_temp_dir(), "zip");
+			
+			$zip = new ZipArchive;
+		    if ($zip->open($tmp_file,  ZipArchive::CREATE)) {
+			    foreach($paths as $path){
+				    if(empty($path)){
+					    echo "Invalid attachment";
+					    unlink($tmp_file);
+					    return;
+				    }
+				    $zip->addFile($path, basename($path));
+			    }
+		        $zip->close();
+		        
+		        header('Content-disposition: attachment; filename=images.zip');
+		        header('Content-type: application/zip');
+		        readfile($tmp_file);
+		        
+		        unlink($tmp_file);
+		   } else {
+		       echo 'Failed!';
+		   }
+	    },
+	  ));
+	});
+	
 ?>
