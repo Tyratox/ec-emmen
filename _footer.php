@@ -60,12 +60,14 @@
 									
 									$links = get_field("footer-links", "option");
 									
-									for($i=0;$i<count($links);$i++){
-										$link = $links[$i];
-										
-										echo '<li class="' . ($i === count($links) - 1 ? "mt-4" : "mt-1") . '">';
-											echo '<a class="underline" href="' . $link["url"] . '">' . $link["text"] . '</a>';
-										echo '</li>';
+									if(is_array($links)){
+										for($i=0;$i<count($links);$i++){
+											$link = $links[$i];
+											
+											echo '<li class="' . ($i === count($links) - 1 ? "mt-4" : "mt-1") . '">';
+												echo '<a class="underline" href="' . $link["url"] . '">' . $link["text"] . '</a>';
+											echo '</li>';
+										}
 									}
 								
 								?>
@@ -77,8 +79,10 @@
 								
 								$logos = get_field("footer-logos", "option");
 								
-								foreach($logos as $logo){
-									echo '<img class="w-3/4 h-auto" src="' . $logo . '">';								
+								if(is_array($logos)){
+									foreach($logos as $logo){
+										echo '<img class="w-3/4 h-auto" src="' . $logo . '">';								
+									}
 								}
 								
 							?>
