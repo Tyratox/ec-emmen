@@ -7,7 +7,7 @@
 			echo '<div class="w-full sm:w-1/2 md:w-1/3 pr-4">';
 			
 				echo '<div class="clip-person relative">';
-					echo '<div class="absolute left-0 top-0 right-0 bottom-0 bg-center bg-cover" style="background-image: url(' . get_field("image") . ')"></div>';
+					echo '<div class="absolute left-0 top-0 right-0 bottom-0 bg-center bg-cover lazy" data-bg="' . get_field("image") . '"></div>';
 				echo '</div>';
 			
 			echo '</div>';
@@ -29,7 +29,7 @@
 				
 				if(!empty($description)){
 					echo "<hr class='border-red border-t-2 my-2'>";
-					echo "<div class=''>" . $description . "</div>";
+					echo "<div class=''>" . nl2br($description) . "</div>";
 				}
 				
 			

@@ -30,6 +30,7 @@
 				$date = get_the_date("d.m.Y");
 				$title = get_the_title();
 				$content = get_the_content();
+				$video_type = get_field("video-type", get_the_id());
 				$thumbnail = get_the_post_thumbnail();
 				
 				$text = '<div class="w-full sm:w-1/2 order-1 mb-4 #PADDING">';
@@ -39,20 +40,54 @@
 					$text .= '<p class="pt-4">' . $content . '</p>';
 				$text .= '</div>';
 				
-				$image = '<div class="w-full sm:w-1/2 order-2 sm:order-1">' . $thumbnail . '</div>';
+				$image = '<div class="w-full sm:w-1/2 order-2 sm:order-1 #PADDING">' . $thumbnail . '</div>';
+				
+				$vid = "";
+				if(empty($video_type) || $video_type === "none"){
+					//
+				}else {
+					$size = get_field("size", get_the_id());
+					$width = get_field("width", get_the_id());
+					$height = get_field("height", get_the_id());
+						
+					if($video_type == "youtube"){
+						$url = get_field("youtube-url", get_the_id());
+			
+						preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $url, $matches);
+						$video_id = $matches[1];
+						
+						if(empty($video_id)){
+							$vid = "Ungültiger Youtube Link!";
+						}else{
+							$vid = '<iframe class="max-w-full max-h-full lazy' . (empty($size) || $size === "full-width" ? " w-full h-auto" : "") . '" width="' . $width . '" height="' . $height . '" data-src="https://www.youtube-nocookie.com/embed/' . $video_id . '" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';	
+						}
+						
+					}else if($video_type == "file"){
+						$url = get_field("video-url", get_the_id());
+						
+						$vid = '<video class="max-w-full max-h-full lazy' . (empty($size) || $size === "full-width" ? " w-full h-auto" : "") . '" controls data-src="' . $url . '" width="' . $width . '" height="' . $height . '">';
+							$vid .= 'Sorry, dein Browser unterstützt dieses Videoformat nicht.';
+							$vid .= 'Du kannst es aber <a href="' . $url . '">hier herunterladen</a> und dann ansehen.';
+						$vid .= '</video>';
+					}	
+				}
+				
+				if(!empty($vid)){
+					$image = '<div class="w-full sm:w-1/2 order-2 sm:order-1 #PADDING">' . $vid . '</div>';
+				}
 				
 				echo '<div class="flex flex-wrap">';
 				
 				if($i % 2 == 0){
 					//text left, image right
 					
-					echo str_replace("#PADDING", "sm:pr-8", $text);
-					echo $image;
+					echo str_replace("#PADDING", "sm:pr-4", $text);
+					echo str_replace("#PADDING", "sm:pl-4", $image);
 				}else{
 					//image left, text right
 					
-					echo $image;
-					echo str_replace("#PADDING", "sm:pl-8", $text);
+					echo str_replace("#PADDING", "sm:pr-4", $image);;
+					echo str_replace("#PADDING", "sm:pl-4", $text);
 				}
 				
 				echo '</div>';

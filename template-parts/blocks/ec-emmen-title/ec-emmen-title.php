@@ -1,9 +1,10 @@
 <?php
 	$t1 = get_field('title_1');
 	$t2 = get_field('title_2');
+	$padding_bottom = get_field('padding-bottom');
 ?>
 
-<div class="container mx-auto pb-8 px-8 <?php echo get_field("padding") ? "" : "sm:px-0"; ?>">
+<div class="container mx-auto <?php echo get_field("padding") ? "px-8" : ""; echo $padding_bottom ? " pb-8" : "" ?>">
 	<?php
 		if(!empty($t1) || !empty($t2)):
 	?>

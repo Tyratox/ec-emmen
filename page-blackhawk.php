@@ -12,7 +12,9 @@
 					<div class="w-full md:w-1/5">
 						<div class="flex flex-wrap">
 							<div class="w-full sm:w-1/2 md:w-full mb-4">
-								<img class="h-32 w-auto mx-auto md:mx-0 md:h-24 mb-8 md:mb-0 lg:h-40" src="<?php echo get_template_directory_uri() . "/images/blackhawks-logo-red.png"; ?>">
+								<a href="/blackhawks">
+									<img class="h-32 w-auto mx-auto md:mx-0 md:h-24 mb-8 md:mb-0 lg:h-40" src="<?php echo get_template_directory_uri() . "/images/blackhawks-logo-red.png"; ?>">
+								</a>
 							</div>
 							
 							<div class="text-white font-bold w-full sm:w-1/2 md:w-full">

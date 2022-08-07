@@ -20,7 +20,7 @@
 			array(
 				'icon-classes' => 'fab fa-youtube',
 				'name' => 'Youtube',
-				'url' => get_field('link-instagram', 'option'),
+				'url' => get_field('link-youtube', 'option'),
 				'username' => get_field('youtube-username', 'option'),
 			),
 			array(
@@ -49,7 +49,7 @@
 		foreach($gallery as $image){
 			echo "<div class='w-full sm:w-1/2 md:w-1/3 px-8 pb-8'>";
 				echo '<div class="clip-person relative">';
-					echo '<div class="absolute left-0 top-0 right-0 bottom-0 bg-center bg-cover" style="background-image: url(' . $image . ')">';
+					echo '<div class="absolute left-0 top-0 right-0 bottom-0 bg-center bg-cover lazy" data-bg="' . $image . '">';
 						echo "<img class='absolute left-0 top-0 w-full h-full glightbox opacity-0 cursor-pointer' src='" . $image . "' data-gallery='gallery-" . ($gallery_count) . "'>";
 					echo '</div>';
 				echo '</div>';

@@ -20,16 +20,23 @@
 		add_editor_style('css/all.min.css');
 	});
 	
+	add_action('init', function(){
+		add_post_type_support( 'post', 'page-attributes' );
+	});
+	
 	add_action("wp_enqueue_scripts", function(){
 		//enqueue styles
 		wp_enqueue_style("font-montserrat", "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap");
 		wp_enqueue_style("fontawesome", get_template_directory_uri() . "/css/all.min.css");
 		wp_enqueue_style("glightbox-css", get_template_directory_uri() . "/css/glightbox.min.css");
-		wp_enqueue_style("main-css", get_template_directory_uri() . "/css/styles.min.css", array("font-montserrat"), "1.4.2");
+		wp_enqueue_style("glider-css", get_template_directory_uri() . "/css/glider.min.css");
+		wp_enqueue_style("main-css", get_template_directory_uri() . "/css/styles.min.css", array("font-montserrat"), "1.4.8");
 		
 		//enqueue scripts
 		wp_enqueue_script("glightbox-js", get_template_directory_uri() . "/js/glightbox.min.js", array(), "1.1", true);
-		wp_enqueue_script("mobile-navigation", get_template_directory_uri() . "/js/mobile-navigation.min.js", array('glightbox-js'), "1.4.1", true);
+		wp_enqueue_script("lazyload-js", get_template_directory_uri() . "/js/lazyload.min.js", array(), "17.3", true);
+		wp_enqueue_script("glider-js", get_template_directory_uri() . "/js/glider.min.js", array(), "1.7.4", true);
+		wp_enqueue_script("ec-emmen", get_template_directory_uri() . "/js/ec-emmen.min.js", array('glightbox-js', 'glider-js', 'lazyload-js'), "1.0.3", true);
 	});
 	
 	add_filter("block_categories", function($categories, $post){
@@ -412,6 +419,8 @@
 				'acf/title',
 				'acf/ec-emmen-title',
 				'acf/hero-image',
+				'acf/hero-slider',
+				'acf/hero-video',
 				'acf/selected-posts',
 				'acf/sponsors',
 				'acf/calendar',
@@ -430,6 +439,8 @@
 				'acf/spacer',
 				'acf/video',
 				'acf/youtube',
+				'acf/text-blocks',
+				'acf/iframe',
 			);
 		}
 		
@@ -527,6 +538,26 @@
 	            'category'          => 'content-blocks',
 	            'icon'              => 'format-image',
 	            'keywords'          => array( 'hero', 'bild', 'diagonal', 'gross' ),
+	        ));
+	        
+	        acf_register_block_type(array(
+	            'name'              => 'hero-slider',
+	            'title'             => 'Grosser Slider, diagonaler Schnitt unten',
+	            'description'       => 'Slider auf die ganze Breite. Unter Seite diagonal abgeschnitten.',
+	            'render_template'   => 'template-parts/blocks/hero-slider/hero-slider.php',
+	            'category'          => 'content-blocks',
+	            'icon'              => 'slides',
+	            'keywords'          => array( 'hero', 'slide', 'slider', 'diagonal', 'gross' ),
+	        ));
+	        
+	        acf_register_block_type(array(
+	            'name'              => 'hero-video',
+	            'title'             => 'Grosses Video, diagonaler Schnitt unten',
+	            'description'       => 'Video auf die ganze Breite. Unter Seite diagonal abgeschnitten.',
+	            'render_template'   => 'template-parts/blocks/hero-video-diagonal/hero-video-diagonal.php',
+	            'category'          => 'content-blocks',
+	            'icon'              => 'video-alt3',
+	            'keywords'          => array( 'hero', 'video', 'film', 'diagonal', 'gross' ),
 	        ));
 	        
 	        acf_register_block_type(array(
@@ -687,6 +718,26 @@
 	            'category'          => 'content-blocks',
 	            'icon'              => 'format-video',
 	            'keywords'          => array( 'video', 'movie', 'film', 'yt', 'youtube' ),
+	        ));
+	        
+	        acf_register_block_type(array(
+	            'name'              => 'text-blocks',
+	            'title'             => 'Textblöcke',
+	            'description'       => 'Füge mehrere Texte nebeneinander ein',
+	            'render_template'   => 'template-parts/blocks/text-blocks/text-blocks.php',
+	            'category'          => 'content-blocks',
+	            'icon'              => 'text',
+	            'keywords'          => array( 'text', 'block', 'horizontal', 'tabelle', 'mehrere' ),
+	        ));
+	        
+	        acf_register_block_type(array(
+	            'name'              => 'iframe',
+	            'title'             => 'Iframe',
+	            'description'       => 'Füge eine Website ein',
+	            'render_template'   => 'template-parts/blocks/iframe/iframe.php',
+	            'category'          => 'content-blocks',
+	            'icon'              => 'admin-site-alt3',
+	            'keywords'          => array( 'iframe', 'website' ),
 	        ));
 	    }
 	});

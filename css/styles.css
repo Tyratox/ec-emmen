@@ -110,12 +110,20 @@
 
 }
 
+@media (max-width: 767px) {
+
+	.wp-content img {
+		margin: 0 auto;
+	}
+
+}
+
 .activity .text p {
 	opacity: 0;
 	transition: all ease-in-out 0.3s;
 }
 
-.activity .text, div {
+.activity .text, .activity div {
 	transition: all ease-in-out 0.3s;
 }
 
@@ -131,8 +139,12 @@
 	top: -25%;
 }
 
-.menu-item:hover .sub-menu {
-	display: block;
+@media (min-width: 375px) {
+
+	.menu-item:hover .sub-menu {
+		display: block;
+	}
+
 }
 
 @media (min-width: 768px) {
@@ -219,4 +231,8 @@ p.login-submit{
 
 #menu-blackhawks li{
 	margin-bottom: 0.25rem;
+}
+
+.glider-dot.active{
+	background: #f00;
 }

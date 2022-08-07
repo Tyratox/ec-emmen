@@ -11,7 +11,7 @@
 		<div class="z-0 relative h-hero-lg bg-center bg-cover" style="background-image: url(<?php echo get_the_post_thumbnail_url(); ?>)">
 		</div>
 		
-		<div class="z-1 relative container mx-auto -mt-64">
+		<div class="z-1 relative container mx-auto -mt-32">
 			<div class="sm:px-8">
 				<div class="relative">
 					<svg class="w-full h-auto" width="100" height="4" viewBox="0 0 100 4" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

@@ -21,7 +21,7 @@
 						
 						foreach($sponsors as $sponsor){
 							echo "<div class='w-full sm:w-1/3 pt-8 pr-8 pb-8 sm:p-8'>";
-								echo "<a href='" . $sponsor["url"] . "'><img src='" . $sponsor["image"] . "' ></a>";
+								echo "<a href='" . $sponsor["url"] . "'><img class='lazy' data-src='" . $sponsor["image"] . "' ></a>";
 							echo "</div>";
 						}	
 					?>

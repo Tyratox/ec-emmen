@@ -16,7 +16,7 @@
 						<div class="container mx-auto">
 							<div class="mx-auto flex flex-wrap justify-between items-center px-4 py-4 sm:px-6 sm:py-4 lg:px-8 md:justify-start md:space-x-10">
 								<div>
-									<a href="#" class="flex">
+									<a href="/" class="flex">
 										<img class="h-12 sm:h-10 lg:h-24 w-auto" src="<?php echo get_template_directory_uri() . "/images/logo.png"; ?>">
 									</a>
 								</div>

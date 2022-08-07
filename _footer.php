@@ -3,18 +3,16 @@
 		?>
 		<footer class="relative pt-5" style="background-color: <?php echo $page_color; ?>">
 			<div class="bg-white">
-				<svg class="w-full h-auto" width="100" height="4.5" viewBox="0 0 100 4.5" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-				    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-				        <polygon fill="<?php echo $page_color; ?>" points="0 0 100 0 0 4"></polygon>
-				        <path d="M0,4.25 L100,0.25" stroke="#f00" stroke-width="0.5"></path>
-				    </g>
-				</svg>
+				<div class="diagonal relative h-5 sm:h-8 md:h-10 lg:h-10">
+					<div class="clip-left-upper-triangle bg-gray absolute left-0 top-0 right-0 bottom-0"></div>
+					<div class="clip-diagonal-bottom-left bg-red absolute left-0 top-0 right-0 bottom-0"></div>
+				</div>
 			
 				<div class="container mx-auto my-5">
 				
 					<div class="flex flex-wrap md:divide-x-4 divide-red">
 						<div class="w-full sm:w-1/2 md:w-1/3 px-10">
-							<h3 class="text-xl font-bold mb-5"><?php echo get_styled_title("Stehts Aktuell"); ?></h3>
+							<h3 class="text-xl font-bold mb-5"><?php echo get_styled_title("Stets Aktuell"); ?></h3>
 							
 							<ul class="list-none">
 								<?php
@@ -28,7 +26,7 @@
 										array(
 											'icon-classes' => 'fab fa-youtube',
 											'name' => 'Youtube',
-											'url' => get_field('link-instagram', 'option')
+											'url' => get_field('link-youtube', 'option')
 										),
 										array(
 											'icon-classes' => 'fab fa-facebook',
@@ -81,7 +79,7 @@
 								
 								if(is_array($logos)){
 									foreach($logos as $logo){
-										echo '<img class="w-3/4 h-auto" src="' . $logo . '">';								
+										echo '<img class="w-3/4 h-auto lazy" data-src="' . $logo . '">';								
 									}
 								}
 								
