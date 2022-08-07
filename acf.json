@@ -1194,7 +1194,7 @@
                     "class": "",
                     "id": ""
                 },
-                "return_format": "url",
+                "return_format": "array",
                 "preview_size": "medium",
                 "insert": "append",
                 "library": "all",
@@ -1207,6 +1207,25 @@
                 "max_height": "",
                 "max_size": "",
                 "mime_types": ""
+            },
+            {
+                "key": "field_62f01d5db3218",
+                "label": "Zeige Download",
+                "name": "show-download",
+                "type": "true_false",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 0,
+                "ui_on_text": "",
+                "ui_off_text": ""
             }
         ],
         "location": [
@@ -1226,7 +1245,7 @@
         "hide_on_screen": "",
         "active": true,
         "description": "",
-        "show_in_rest": false
+        "show_in_rest": 0
     },
     {
         "key": "group_5fb238c05a4d4",
