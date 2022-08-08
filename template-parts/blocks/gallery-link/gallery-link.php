@@ -6,7 +6,6 @@
 		$page_id = $page_id[0];
 	}else{
 		echo "Ungültige Seite verlinkt";
-		var_dump($page_id);
 		return;
 	}
 	
