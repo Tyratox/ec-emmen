@@ -432,6 +432,7 @@
 				'acf/email',
 				'acf/unicycle',
 				'acf/gallery',
+				'acf/gallery-link-download',
 				'contact-form-7/contact-form-selector',
 				'acf/registrations',
 				'acf/login',
@@ -691,6 +692,16 @@
 	        ));
 	        
 	        acf_register_block_type(array(
+	            'name'              => 'gallery-link-download',
+	            'title'             => 'Gallerie Link & Download',
+	            'description'       => 'Zeige einen Link zu einer Gallerie-Seite',
+	            'render_template'   => 'template-parts/blocks/gallery-link/gallery-link.php',
+	            'category'          => 'content-blocks',
+	            'icon'              => 'download',
+	            'keywords'          => array( 'gallerie', 'link', 'ordner', 'download' ),
+	        ));
+	        
+	        acf_register_block_type(array(
 	            'name'              => 'spacer',
 	            'title'             => 'Abstand / Spacer',
 	            'description'       => 'Füge ein Abstand ein',
@@ -801,7 +812,7 @@
 			    }
 		        $zip->close();
 		        
-		        header('Content-disposition: attachment; filename=images.zip');
+		        header('Content-disposition: attachment; filename=bilder.zip');
 		        header('Content-type: application/zip');
 		        readfile($tmp_file);
 		        

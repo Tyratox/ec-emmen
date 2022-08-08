@@ -8,6 +8,7 @@
 	
 	$gallery = get_field("gallery");
 	$show_download = get_field("show-download");
+	$show_social_media = get_field("show-social-media");
 	
 	echo "<div class='flex flex-wrap'>";
 	
@@ -32,19 +33,21 @@
 			),
 		);
 		
-		foreach($social_media_links as $link){
-			if($link['url']){
-				echo "<div class='w-1/3 px-8 mb-4'>";
-					echo '<a class="hover:text-red flex flex-col items-center justify-center text-center" href="' . $link['url'] . '">';
-						echo '<i class="' . $link['icon-classes'] . ' text-4xl w-10 h-auto mb-4"></i>';
-						if(empty($link['username'])){
-							echo $link['name'];	
-						}else{
-							echo $link['username'];	
-						}
-					echo '</a>';
-				echo "</div>";
-			}
+		if($show_social_media){
+			foreach($social_media_links as $link){
+				if($link['url']){
+					echo "<div class='w-1/3 px-8 mb-4'>";
+						echo '<a class="hover:text-red flex flex-col items-center justify-center text-center" href="' . $link['url'] . '">';
+							echo '<i class="' . $link['icon-classes'] . ' text-4xl w-10 h-auto mb-4"></i>';
+							if(empty($link['username'])){
+								echo $link['name'];	
+							}else{
+								echo $link['username'];	
+							}
+						echo '</a>';
+					echo "</div>";
+				}
+			}	
 		}
 	
 		foreach($gallery as $image){
