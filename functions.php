@@ -780,12 +780,46 @@
 	}
 	
 	add_action( 'rest_api_init', function(){
-	  register_rest_route( 'ec-emmen', '/download/(?P<ids>(\d+,)*\d+)', array(
+	  register_rest_route( 'ec-emmen', '/download/(?P<id>\d+)(?:/(?P<idx>\d+))?', array(
 	    'methods' => 'GET',
 	    'callback' => function(WP_REST_Request $request){
 			$parameters = $request->get_params();
-			$ids = array_map("intval", explode(",", $parameters["ids"]));
-			$paths = array_map("get_attached_file", $ids);
+			$page_id = $parameters["id"];
+			
+			$gallery_idx = null;
+			if(array_key_exists("idx", $parameters)){
+				$gallery_idx = $parameters["idx"];	
+			}
+			
+			// get all blocks of the page
+			$blocks = parse_blocks(get_the_content(null, false, $page_id));
+			
+			// filter for galleries
+			$galleries = array_values(array_filter($blocks, function($block){
+				return $block["blockName"] == "acf/gallery";
+			}));
+		
+			$attachment_ids = [];
+			
+			if($gallery_idx != null){
+				if(count($galleries) <= $gallery_idx){
+					echo "Invalid gallery index";
+					return;
+				}
+				
+				$attachment_ids = $galleries[$gallery_idx]["attrs"]["data"]["gallery"];
+			}else{
+				foreach($galleries as $gallery){
+					$attachment_ids = array_merge($attachment_ids, $gallery["attrs"]["data"]["gallery"]);
+				}	
+			}
+			
+			if(count($attachment_ids) <= 0){
+				echo "No attachments found on the given page";
+				return;
+			}
+			
+			$paths = array_map("get_attached_file", $attachment_ids);
 			
 			/*$posts = (
 				new WP_Query(

@@ -8,26 +8,8 @@
 	}
 	
 	foreach($page_ids as $page_id){
-		// get all blocks of the page
-		$blocks = parse_blocks(get_the_content(null, false, $page_id));
 		
-		// filter for galleries
-		$galleries = array_values(array_filter($blocks, function($block){
-			return $block["blockName"] == "acf/gallery";
-		}));
-		
-		// ensure there is only a single one
-		if(count($galleries) != 1){
-			echo "Die verlinkte Seite muss genau eine einzelne Gallerie enthalten";
-			return;
-		}
-		
-		$gallery = $galleries[0];
-		
-		$attachment_ids = $gallery["attrs"]["data"]["gallery"];
-		
-		
-		$url = "/wp-json/ec-emmen/download/" . implode(",", $attachment_ids);
+		$url = "/wp-json/ec-emmen/download/" . $page_id;
 		
 		echo "<div class='border-b-2 border-red pb-4 my-4 flex items-center'>";
 			
