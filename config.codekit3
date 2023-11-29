@@ -113,6 +113,18 @@
       "oF" : 1,
       "pg" : 0
     },
+    "\/css\/styles.min copy.css" : {
+      "aP" : 1,
+      "bl" : 0,
+      "ci" : 0,
+      "co" : 0,
+      "ft" : 16,
+      "ma" : 0,
+      "oA" : 0,
+      "oAP" : "\/css\/styles.min copy.min.css",
+      "oF" : 0,
+      "pg" : 0
+    },
     "\/css\/styles.min.css" : {
       "aP" : 1,
       "bl" : 0,
@@ -473,6 +485,14 @@
       "hM" : 0,
       "oA" : 0,
       "oAP" : "\/template-parts\/blocks\/file\/file.php",
+      "oF" : 0
+    },
+    "\/template-parts\/blocks\/gallery-link\/gallery-link.php" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/template-parts\/blocks\/gallery-link\/gallery-link.php",
       "oF" : 0
     },
     "\/template-parts\/blocks\/gallery\/gallery.php" : {

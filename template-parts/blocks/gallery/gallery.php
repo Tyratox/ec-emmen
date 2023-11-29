@@ -7,6 +7,10 @@
 	}
 	
 	$gallery = get_field("gallery");
+	if(empty($gallery)){
+		$gallery = [];
+	}
+	
 	$show_download = get_field("show-download");
 	$show_social_media = get_field("show-social-media");
 	
@@ -74,7 +78,7 @@
 		echo "<div class='flex justify-center'>";
 			echo '<a download class="hover:text-red flex items-center" href="' . "/wp-json/ec-emmen/download/" . get_the_ID() . "/" . $gallery_count . '">';
 				echo '<i class="fas fa-cloud-download-alt text-3xl w-10 h-auto mr-2"></i>';
-				echo "Download";
+				echo "Download alle";
 			echo '</a>';
 		echo "</div>";
 	}

@@ -30,13 +30,13 @@
 		wp_enqueue_style("fontawesome", get_template_directory_uri() . "/css/all.min.css");
 		wp_enqueue_style("glightbox-css", get_template_directory_uri() . "/css/glightbox.min.css");
 		wp_enqueue_style("glider-css", get_template_directory_uri() . "/css/glider.min.css");
-		wp_enqueue_style("main-css", get_template_directory_uri() . "/css/styles.min.css", array("font-montserrat"), "1.4.8");
+		wp_enqueue_style("main-css", get_template_directory_uri() . "/css/styles.min.css", array("font-montserrat"), "1.4.12");
 		
 		//enqueue scripts
 		wp_enqueue_script("glightbox-js", get_template_directory_uri() . "/js/glightbox.min.js", array(), "1.1", true);
 		wp_enqueue_script("lazyload-js", get_template_directory_uri() . "/js/lazyload.min.js", array(), "17.3", true);
 		wp_enqueue_script("glider-js", get_template_directory_uri() . "/js/glider.min.js", array(), "1.7.4", true);
-		wp_enqueue_script("ec-emmen", get_template_directory_uri() . "/js/ec-emmen.min.js", array('glightbox-js', 'glider-js', 'lazyload-js'), "1.0.3", true);
+		wp_enqueue_script("ec-emmen", get_template_directory_uri() . "/js/ec-emmen.min.js", array('glightbox-js', 'glider-js', 'lazyload-js'), "1.0.7", true);
 	});
 	
 	add_filter("block_categories", function($categories, $post){

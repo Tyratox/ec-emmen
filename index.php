@@ -29,18 +29,18 @@
 				
 				$date = get_the_date("d.m.Y");
 				$title = get_the_title();
-				$content = get_the_content();
+				$content = apply_filters('the_content', get_the_content(null, false, get_the_id()));
 				$video_type = get_field("video-type", get_the_id());
 				$thumbnail = get_the_post_thumbnail();
 				
-				$text = '<div class="w-full sm:w-1/2 order-1 mb-4 #PADDING">';
+				$text = '<div class="w-full sm:w-1/2 lg:w-2/3 order-1 mb-4 #PADDING">';
 					$text .= '<div class="text-red">' . $date . '</div>';
 					$text .= '<h4 class="font-bold text-2xl">' . $title . '</h4>';
 					$text .= '<hr class="border-t-4 border-black">';
-					$text .= '<p class="pt-4">' . $content . '</p>';
+					$text .= '<div class="clamp clamped news-post"><div class="content pt-4">' . $content . '</div><div class="toggle-line-clamp text-red"><div class="more">Zeige mehr</div><div class="less">Zeige weniger</div></div></div>';
 				$text .= '</div>';
 				
-				$image = '<div class="w-full sm:w-1/2 order-2 sm:order-1 #PADDING">' . $thumbnail . '</div>';
+				$image = '<div class="w-full sm:w-1/2 lg:w-1/3 order-2 sm:order-1 #PADDING">' . $thumbnail . '</div>';
 				
 				$vid = "";
 				if(empty($video_type) || $video_type === "none"){

@@ -9758,40 +9758,39 @@ p.login-submit{
   background: #f00;
 }
 
-.clamp .toggle-line-clamp .less, .more {
-  cursor: pointer;
+.clamp .toggle-line-clamp {
+  .less, .more {
+    cursor: pointer;
+  }
+  .more {
+    display: none;
+  }
+  .less {
+    display: block;
+  }
 }
 
-.clamp .toggle-line-clamp .more {
-  display: none;
-}
-
-.clamp .toggle-line-clamp .less {
-  display: block;
-}
-
-.clamp.clamped .toggle-line-clamp .more {
-  display: block;
-}
-
-.clamp.clamped .toggle-line-clamp .less {
-  display: none;
+.clamp.clamped .toggle-line-clamp {
+  .more {
+    display: block;
+  }
+  .less {
+    display: none;
+  }
 }
 
 .news-post.clamped .content {
   /* only show the first six lines by default */
-  /*display: -webkit-box;*/
-  /*-webkit-line-clamp: 6;*/ /* number of lines to show */
-  /*line-clamp: 6;*/
-  /*-webkit-box-orient: vertical;*/
+  display: -webkit-box;
+  -webkit-line-clamp: 6; /* number of lines to show */
+  line-clamp: 6;
+  -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-height: 16rem;
+  * {
+    display: inline;
+  }
 }
-
-/*.news-post.clamped .content * {
-	display: inline;
-}*/
 
 @media (min-width: 640px) {
   .sm\:container {

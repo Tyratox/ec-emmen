@@ -11,14 +11,17 @@
 		
 		$url = "/wp-json/ec-emmen/download/" . $page_id;
 		
-		echo "<div class='border-b-2 border-red pb-4 my-4 flex items-center'>";
+		echo "<div class='border-b-2 border-red pb-4 my-4 flex items-center justify-between'>";
+			
+			echo '<a class="hover:text-red flex items-center" href="' . get_permalink($page_id) . '" title="Zur Gallerie">';
+				echo '<i class="fas fa-folder text-3xl w-10 h-auto mr-2"></i>';
+				
+				echo get_the_title($page_id);
+			echo '</a>';
 			
 			echo '<a download class="hover:text-red flex items-center" href="' . $url . '" title="Alle Bilder herunterladen">';
 				echo '<i class="fas fa-cloud-download-alt text-3xl w-10 h-auto mr-2"></i>';
-			echo '</a>';
-			
-			echo '<a class="hover:text-red flex" href="' . get_permalink($page_id) . '" title="Zur Gallerie">';
-				echo get_the_title($page_id);
+				echo '(alle)';
 			echo '</a>';
 			
 		echo "</div>";	

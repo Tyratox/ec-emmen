@@ -1,6 +1,7 @@
 <?php
 	
 	$form_id = get_field("form_id");
+	$order = get_field("order");
 	
 	
 	
@@ -16,8 +17,8 @@
     );
     
     $to_delete = array();
-    
     echo "<table class='w-full'>";
+    
     
 	    echo "<thead>";
 	    	
@@ -61,7 +62,12 @@
 			    if ($a['date'] == $b['date']) {
 			        return 0;
 			    }
-			    return ($a['date'] > $b['date']) ? -1 : 1;
+			    
+			    if(empty($order) || $order === "asc"){
+				    return ($a['date'] > $b['date']) ? 1 : -1;
+			    }else {
+				    return ($a['date'] > $b['date']) ? -1 : 1;
+			    }
 		    });
 		    
 		    foreach($entries as $entry){

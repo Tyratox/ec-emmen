@@ -101,6 +101,32 @@ document.addEventListener("DOMContentLoaded", () => {
 	recomputeIframes();
 	//and then when the window is resized
 	window.addEventListener("resize", recomputeIframes);
+	
+	// line-clamps
+	document.querySelectorAll(".clamp").forEach((el) => {
+		const more = el.querySelector(".toggle-line-clamp .more");
+		const less = el.querySelector(".toggle-line-clamp .less");
+		const content = el.querySelector(".content");
+		
+		if(more == null || less == null || content == null){
+			return;
+		}
+		
+		// check if there is overflow
+		if(content.clientHeight < content.scrollHeight){
+			more.addEventListener("click", () => {
+				el.classList.remove("clamped");
+			});
+			
+			less.addEventListener("click", () => {
+				el.classList.add("clamped");
+			});
+		}else{
+			// otherwise remove the toggles
+			more.remove();
+			less.remove();
+		}
+	});
 });
 
 window.addEventListener('load', function(){
